@@ -17,22 +17,21 @@ test_labels = []
 valid_images = []
 valid_labels = []
 
-NUM_IMAGES = 1000
 DIM = 300
 train_path = "dataset/train"
 valid_path = "dataset/valid"
 test_path = "dataset/test"
 
-train_batches = ImageDataGenerator().flow_from_directory(train_path, target_size=(DIM,DIM), classes=CLASS_NAMES, batch_size=200)
-valid_batches = ImageDataGenerator().flow_from_directory(valid_path, target_size=(DIM,DIM), classes=CLASS_NAMES, batch_size=7)
+train_batches = ImageDataGenerator().flow_from_directory(train_path, target_size=(DIM,DIM), classes=CLASS_NAMES, batch_size=10)
+valid_batches = ImageDataGenerator().flow_from_directory(valid_path, target_size=(DIM,DIM), classes=CLASS_NAMES, batch_size=10)
 test_batches = ImageDataGenerator().flow_from_directory(test_path, target_size=(DIM,DIM), classes=CLASS_NAMES, batch_size=1)
 
 model = models.Sequential([
     layers.Conv2D(32, (3, 3), activation = 'relu', input_shape=(DIM, DIM, 3)),
-    # layers.MaxPooling2D((2, 2)),
-    # layers.Conv2D(32, (3, 3), activation = 'relu', input_shape=(DIM, DIM, 3)),
-    # layers.MaxPooling2D((2, 2)),
-    # layers.Conv2D(32, (3, 3), activation = 'relu', input_shape=(DIM, DIM, 3)),
+    layers.MaxPooling2D((2, 2)),
+    #layers.Conv2D(32, (3, 3), activation = 'relu', input_shape=(DIM, DIM, 3)),
+    #layers.MaxPooling2D((2, 2)),
+    #layers.Conv2D(32, (3, 3), activation = 'relu', input_shape=(DIM, DIM, 3)),
     layers.Flatten(),
     layers.Dense(2, activation='relu')
 
@@ -40,8 +39,8 @@ model = models.Sequential([
 
 print(model.summary())
 
-model.compile(optimizers.Adam(lr=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizers.Adam(lr=0.0000000001), loss='binary_crossentropy', metrics=['accuracy'])
 
-model.fit_generator(train_batches, steps_per_epoch=1, validation_data=valid_batches, validation_steps=4, epochs=200, verbose=2)
+model.fit_generator(train_batches, steps_per_epoch=1, validation_data=valid_batches, validation_steps=1, epochs=200, verbose=2)
 
-
+test_images, test_labels = next(test_batches)
