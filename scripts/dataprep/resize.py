@@ -4,7 +4,7 @@ import cv2
 
 # this program resizes all images and tries to normalize all images to preapre for training
 dimensions = (300, 300)
-directory = "dataset/no"
+directory = "dataset/negative"
 i = 1
 for image in os.listdir(directory):    
     print("resizing file (no): " + str(i))
@@ -13,7 +13,7 @@ for image in os.listdir(directory):
     cv2.imwrite(os.path.join(directory, image),resized)
     i = i + 1
 
-directory = "dataset/yes"
+directory = "dataset/positive"
 i = 1
 for image in os.listdir(directory):    
     print("resizing file (yes): " + str(i))

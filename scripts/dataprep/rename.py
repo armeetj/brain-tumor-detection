@@ -3,7 +3,7 @@ from os import path
 
 # This program quickly renames all data files to #.jpg in the yes/ and no/ folders of dataset/
 
-directory = "dataset/no"
+directory = "dataset/negative"
 i = 1
 for image in os.listdir(directory):    
     print("converting file (no): " + str(i))
@@ -12,7 +12,7 @@ for image in os.listdir(directory):
     print(image)
     i = i + 1
 
-directory = "dataset/yes"
+directory = "dataset/positive"
 i = 1
 for image in os.listdir(directory):    
     print("converting file (yes): " + str(i))
