@@ -1,1 +1,1 @@
-# brainTumor Detection - Synopsys 2020
+# brainTumor Detection
